@@ -270,13 +270,23 @@ export default function SearchResultsPage() {
 
             <div className="results-header__mobile-providers">
               {providerCards.map((provider) => (
-                <div key={provider.id} className="results-header__mobile-provider">
+                <label
+                  key={provider.id}
+                  className={`results-header__mobile-provider ${filter[provider.id] ? "" : "results-header__mobile-provider--off"}`}
+                >
                   <div className="results-header__mobile-provider-title">
+                    <input
+                      type="checkbox"
+                      checked={filter[provider.id]}
+                      onChange={(event) =>
+                        setFilter((current) => ({ ...current, [provider.id]: event.target.checked }))
+                      }
+                    />
                     <span className="provider-card__dot" style={{ background: provider.accent }} />
                     <strong>{provider.name}</strong>
                   </div>
                   <small>{provider.visible}개 표시</small>
-                </div>
+                </label>
               ))}
             </div>
           </div>

@@ -1007,12 +1007,25 @@ a { color: inherit; text-decoration: none; }
 .results-header__mobile-provider {
   display: grid;
   gap: 6px;
+  cursor: pointer;
 }
 
 .results-header__mobile-provider-title {
   display: flex;
   align-items: center;
   gap: 7px;
+}
+
+.results-header__mobile-provider-title input {
+  width: 14px;
+  height: 14px;
+  margin: 0;
+  flex: 0 0 14px;
+  accent-color: var(--brand);
+}
+
+.results-header__mobile-provider--off {
+  opacity: 0.52;
 }
 
 .results-header__mobile-provider-title strong {
