@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Script from "next/script";
 import "./globals.css";
 
@@ -19,7 +20,12 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <Link href="/" className="global-home-link" aria-label={`${BRAND_NAME} 홈으로 이동`}>
+          <img src="/jangteomoa-logo.png" alt={`${BRAND_NAME} 로고`} />
+        </Link>
+        <div className="app-content">{children}</div>
+      </body>
     </html>
   );
 }
