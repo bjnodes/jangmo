@@ -13,8 +13,6 @@ import {
   saveRecentSearch,
 } from "@/lib/market-ui";
 
-const QUICK_KEYWORDS = ["아이폰 15", "비앙키", "브롬톤", "플레이스테이션 5"];
-
 const SORT_OPTIONS = [
   { value: "latest", label: "최신순" },
   { value: "relevance", label: "관련순" },
@@ -227,19 +225,6 @@ export default function HomePage() {
                       onClick={() => setPageSize(size)}
                     >
                       {size}개
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="home-search-panel__footer">
-              <div className="home-search-panel__quick">
-                <span className="sidebar-title">빠른 검색</span>
-                <div className="chip-wrap">
-                  {QUICK_KEYWORDS.map((keyword) => (
-                    <button key={keyword} type="button" className="chip" onClick={() => submitSearch(keyword)}>
-                      {keyword}
                     </button>
                   ))}
                 </div>

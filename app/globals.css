@@ -85,6 +85,7 @@ a { color: inherit; text-decoration: none; }
 .brand__text strong { display: block; font-size: 1.08rem; }
 .brand__text span { display: block; margin-top: 2px; color: var(--muted); font-size: 0.9rem; }
 .topbar-tabs, .topbar-links, .toggle-group, .chip-wrap, .notice-wrap, .link-list { display: flex; flex-wrap: wrap; gap: 12px; }
+.chip-wrap { align-items: flex-start; align-content: flex-start; }
 .topbar-tabs { justify-content: center; }
 .topbar-links { justify-content: flex-end; }
 .topbar-tab, .topbar-links a, .chip, .toggle-pill, .secondary-button, .result-card__link, .pagination button, .page-size__button, .hero-badge {
@@ -101,6 +102,7 @@ a { color: inherit; text-decoration: none; }
   white-space: nowrap;
   transition: background 140ms ease, border-color 140ms ease, color 140ms ease, transform 140ms ease;
 }
+.chip { width: fit-content; flex: 0 0 auto; }
 .topbar-tab:hover, .topbar-links a:hover, .chip:hover, .secondary-button:hover, .result-card__link:hover, .pagination button:hover, .page-size__button:hover { background: #f8fbff; border-color: #cfe0f8; }
 .topbar-tab--active, .page-size__button--active { background: var(--brand-soft); color: var(--brand); border-color: rgba(47,128,237,0.3); font-weight: 800; }
 
@@ -519,17 +521,6 @@ a { color: inherit; text-decoration: none; }
   grid-column: span 2;
 }
 
-.home-search-panel__footer {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 14px;
-}
-
-.home-search-panel__quick {
-  display: grid;
-  gap: 12px;
-}
-
 .home-brand {
   padding: 22px 22px;
   display: flex;
@@ -609,6 +600,7 @@ a { color: inherit; text-decoration: none; }
   padding: 24px 22px;
   display: grid;
   gap: 14px;
+  align-content: start;
 }
 
 .home-options {
