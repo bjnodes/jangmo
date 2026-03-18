@@ -53,7 +53,7 @@ export default function SearchResultsPage() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [progress, setProgress] = useState(0);
-  const [progressLabel, setProgressLabel] = useState("검색 준비 중");
+  const [progressLabel, setProgressLabel] = useState("검색을 준비하고 있어요.");
 
   useEffect(() => {
     const nextQuery = searchParams.get("q") || "";
@@ -91,7 +91,7 @@ export default function SearchResultsPage() {
       { delay: 240, value: 22, label: "세 플랫폼에 검색 요청을 보내고 있어요." },
       { delay: 760, value: 46, label: "당근마켓, 중고나라, 번개장터 결과를 모으는 중이에요." },
       { delay: 1500, value: 71, label: "가격과 게시글 정보를 정리하고 있어요." },
-      { delay: 2300, value: 88, label: "화면에 맞게 검색 결과를 다듬고 있어요." },
+      { delay: 2300, value: 88, label: "화면에 맞게 검색 결과를 묶고 있어요." },
     ];
 
     stagedUpdates.forEach((stage) => {
@@ -244,26 +244,26 @@ export default function SearchResultsPage() {
     router.push(`/search?${params}`);
   }
 
+  const headerDescription = data.daangnRegionResolved?.fullLabel
+    ? `당근마켓은 ${data.daangnRegionResolved.fullLabel} 기준으로 검색했어요.`
+    : "모든 중고 플랫폼들의 상품 검색 결과입니다.";
+
   return (
     <main className="results-page">
       <section className="results-shell">
         <header className="results-header">
           <div>
             <h1>{cleanText(query) || "통합 검색 결과"}</h1>
-            <p>
-              {data.daangnRegionResolved?.fullLabel
-                ? `당근마켓은 ${data.daangnRegionResolved.fullLabel} 기준으로 검색했어요.`
-                : "검색 결과를 플랫폼별로 나눠서 한 화면에서 비교할 수 있어요."}
-            </p>
+            <p>{headerDescription}</p>
           </div>
           <div className="results-header__mobile-summary">
             <div className="results-header__mobile-stats">
               <div className="results-header__mobile-chip">
-                <span>珥?寃곌낵</span>
-                <strong>{filteredItems.length}媛?</strong>
+                <span>총 결과</span>
+                <strong>{filteredItems.length}개</strong>
               </div>
               <div className="results-header__mobile-chip results-header__mobile-chip--wide">
-                <span>?됯퇏 ?쒖꽭</span>
+                <span>평균 시세</span>
                 <strong>{avgPrice}</strong>
               </div>
             </div>
@@ -275,7 +275,7 @@ export default function SearchResultsPage() {
                     <span className="provider-card__dot" style={{ background: provider.accent }} />
                     <strong>{provider.name}</strong>
                   </div>
-                  <small>{provider.visible}媛??쒖떆</small>
+                  <small>{provider.visible}개 표시</small>
                 </div>
               ))}
             </div>

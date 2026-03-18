@@ -6,17 +6,20 @@ const BRAND_NAME = "장터모아";
 
 export const metadata = {
   title: BRAND_NAME,
-  description: "당근마켓, 중고나라, 번개장터를 한 번에 검색하는 중고거래 통합 웹 앱",
+  description: "당근마켓, 중고나라, 번개장터를 한 번에 검색하는 중고거래 통합 검색 서비스",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="ko">
-      <head>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7152371441049509"
-     crossorigin="anonymous"></script>
-      </head>
       <body>
+        <Script
+          id="google-adsense"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7152371441049509"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         <header className="global-header">
           <div className="global-header__inner">
             <Link href="/" className="global-home-link" aria-label={`${BRAND_NAME} 홈으로 이동`}>
