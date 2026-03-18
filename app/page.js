@@ -143,107 +143,113 @@ export default function HomePage() {
             </div>
 
             <div className="home-search-panel__details">
-              <label className="field field--span-2">
-                <span>당근 지역</span>
-                <input
-                  value={region}
-                  onChange={(event) => setRegion(event.target.value)}
-                  placeholder="하안동, 성수동, 서초동"
-                />
-                {regionSuggestions.length ? (
-                  <div className="suggestions">
-                    {regionSuggestions.map((item) => (
-                      <button
-                        key={item.inValue}
-                        type="button"
-                        className="suggestion"
-                        onMouseDown={(event) => {
-                          event.preventDefault();
-                          setRegion(item.label);
-                          setRegionSuggestions([]);
-                        }}
-                      >
-                        <strong>{item.label}</strong>
-                        <span>{item.fullLabel || item.label}</span>
-                      </button>
+              <div className="home-search-panel__column">
+                <label className="field">
+                  <span>당근 지역</span>
+                  <input
+                    value={region}
+                    onChange={(event) => setRegion(event.target.value)}
+                    placeholder="하안동, 성수동, 서초동"
+                  />
+                  {regionSuggestions.length ? (
+                    <div className="suggestions">
+                      {regionSuggestions.map((item) => (
+                        <button
+                          key={item.inValue}
+                          type="button"
+                          className="suggestion"
+                          onMouseDown={(event) => {
+                            event.preventDefault();
+                            setRegion(item.label);
+                            setRegionSuggestions([]);
+                          }}
+                        >
+                          <strong>{item.label}</strong>
+                          <span>{item.fullLabel || item.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  ) : null}
+                </label>
+
+                <div className="field">
+                  <span>플랫폼</span>
+                  <div className="toggle-group">
+                    {Object.entries(PROVIDERS).map(([providerId, providerName]) => (
+                      <label key={providerId} className="toggle-pill">
+                        <input
+                          type="checkbox"
+                          checked={platforms[providerId]}
+                          onChange={(event) =>
+                            setPlatforms((current) => ({ ...current, [providerId]: event.target.checked }))
+                          }
+                        />
+                        <span>{providerName}</span>
+                      </label>
                     ))}
                   </div>
-                ) : null}
-              </label>
-
-              <div className="price-range-block field--span-2">
-                <div className="field-row field-row--price">
-                  <label className="field">
-                    <span>최소 가격</span>
-                    <input
-                      type="number"
-                      value={minPrice}
-                      onChange={(event) => setMinPrice(event.target.value)}
-                      placeholder="0"
-                    />
-                  </label>
-
-                  <label className="field">
-                    <span>최대 가격</span>
-                    <input
-                      type="number"
-                      value={maxPrice}
-                      onChange={(event) => setMaxPrice(event.target.value)}
-                      placeholder="제한 없음"
-                    />
-                  </label>
                 </div>
-
-                <PriceRangeControl
-                  minPrice={minPrice}
-                  maxPrice={maxPrice}
-                  onMinPriceChange={setMinPrice}
-                  onMaxPriceChange={setMaxPrice}
-                />
               </div>
 
-              <label className="field">
-                <span>정렬</span>
-                <select value={sort} onChange={(event) => setSort(event.target.value)}>
-                  {SORT_OPTIONS.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
-              <div className="field field--span-2">
-                <span>플랫폼</span>
-                <div className="toggle-group">
-                  {Object.entries(PROVIDERS).map(([providerId, providerName]) => (
-                    <label key={providerId} className="toggle-pill">
+              <div className="home-search-panel__column">
+                <div className="price-range-block">
+                  <div className="field-row field-row--price">
+                    <label className="field">
+                      <span>최소 가격</span>
                       <input
-                        type="checkbox"
-                        checked={platforms[providerId]}
-                        onChange={(event) =>
-                          setPlatforms((current) => ({ ...current, [providerId]: event.target.checked }))
-                        }
+                        type="number"
+                        value={minPrice}
+                        onChange={(event) => setMinPrice(event.target.value)}
+                        placeholder="0"
                       />
-                      <span>{providerName}</span>
                     </label>
-                  ))}
-                </div>
-              </div>
 
-              <div className="field">
-                <span>페이지당 보기</span>
-                <div className="page-size">
-                  {PAGE_SIZES.map((size) => (
-                    <button
-                      key={size}
-                      type="button"
-                      className={`page-size__button ${pageSize === size ? "page-size__button--active" : ""}`}
-                      onClick={() => setPageSize(size)}
-                    >
-                      {size}개
-                    </button>
-                  ))}
+                    <label className="field">
+                      <span>최대 가격</span>
+                      <input
+                        type="number"
+                        value={maxPrice}
+                        onChange={(event) => setMaxPrice(event.target.value)}
+                        placeholder="제한 없음"
+                      />
+                    </label>
+                  </div>
+
+                  <PriceRangeControl
+                    minPrice={minPrice}
+                    maxPrice={maxPrice}
+                    onMinPriceChange={setMinPrice}
+                    onMaxPriceChange={setMaxPrice}
+                  />
+                </div>
+
+                <div className="home-search-panel__row">
+                  <label className="field">
+                    <span>정렬</span>
+                    <select value={sort} onChange={(event) => setSort(event.target.value)}>
+                      {SORT_OPTIONS.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+
+                  <div className="field">
+                    <span>페이지당 보기</span>
+                    <div className="page-size">
+                      {PAGE_SIZES.map((size) => (
+                        <button
+                          key={size}
+                          type="button"
+                          className={`page-size__button ${pageSize === size ? "page-size__button--active" : ""}`}
+                          onClick={() => setPageSize(size)}
+                        >
+                          {size}개
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
