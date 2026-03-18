@@ -14,6 +14,7 @@
   --radius-md: 16px;
   --radius-sm: 12px;
   --section-gap: 20px;
+  --layout-gap: 28px;
   --font-ui: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
 }
 
@@ -74,7 +75,11 @@ a { color: inherit; text-decoration: none; }
 .topbar-tab:hover, .topbar-links a:hover, .chip:hover, .secondary-button:hover, .result-card__link:hover, .pagination button:hover, .page-size__button:hover { background: #f8fbff; border-color: #cfe0f8; }
 .topbar-tab--active, .page-size__button--active { background: var(--brand-soft); color: var(--brand); border-color: rgba(47,128,237,0.3); font-weight: 800; }
 
-.view { padding: 28px 0 42px; }
+.view {
+  padding: 28px 0 42px;
+  display: grid;
+  gap: var(--layout-gap);
+}
 .hero-layout, .search-layout, .seller-layout, .summary-grid, .provider-grid, .results-grid, .photo-grid, .seller-platform-grid, .field-row, .seller-grid, .summary-list {
   display: grid;
   gap: var(--section-gap);
@@ -133,14 +138,18 @@ a { color: inherit; text-decoration: none; }
 .quick-stat span {
   display: block;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   font-weight: 700;
+  line-height: 1.35;
+  word-break: keep-all;
 }
 .quick-stat strong {
   display: block;
   margin-top: 10px;
-  font-size: 1.8rem;
+  font-size: 1.45rem;
   letter-spacing: -0.03em;
+  line-height: 1.1;
+  white-space: nowrap;
 }
 .platform-link-card {
   min-height: 46px;
@@ -326,13 +335,14 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 760px) {
   .shell-topbar { display: none; }
-  .view { width: min(100%, calc(100% - 16px)); padding: 16px 0 28px; }
+  .view { width: min(100%, calc(100% - 16px)); padding: 16px 0 28px; gap: 22px; }
   .hero-layout, .summary-grid, .provider-grid, .results-grid, .seller-grid--two, .seller-grid--three, .seller-grid--split, .photo-grid { grid-template-columns: 1fr; }
   .hero-banner, .quick-card, .panel, .summary-card { padding: 18px; border-radius: 20px; }
   .quick-card--recent { min-height: 220px; }
-  .quick-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-  .quick-stat { padding: 16px; border-radius: 18px; }
-  .quick-stat strong { font-size: 1.35rem; }
+  .quick-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .quick-stat { padding: 12px 10px; border-radius: 16px; }
+  .quick-stat span { font-size: 0.76rem; }
+  .quick-stat strong { margin-top: 8px; font-size: 1.1rem; }
   .hero-banner h1 { font-size: clamp(1.8rem, 8vw, 2.6rem); max-width: none; }
   .topbar-tab, .topbar-links a { min-height: 36px; padding: 0 12px; }
   .page-size { grid-template-columns: repeat(3, minmax(0, 1fr)); }
