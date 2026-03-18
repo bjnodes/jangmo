@@ -126,14 +126,41 @@ a { color: inherit; text-decoration: none; }
   font-size: clamp(2.9rem, 5vw, 5rem);
   font-weight: 900;
   line-height: 0.95;
+  margin-top: 18px;
+  margin-bottom: 18px;
 }
 .hero-banner p, .quick-card p, .panel p, .provider-card p, .empty-copy { color: var(--muted); }
 .hero-banner p {
   margin: 18px 0 0;
   max-width: 34rem;
 }
+.hero-feature-grid {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.hero-feature {
+  min-width: 0;
+  padding: 16px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(47, 128, 237, 0.16);
+  background: rgba(255, 255, 255, 0.78);
+}
+.hero-feature strong {
+  display: block;
+  font-size: 0.96rem;
+  font-weight: 800;
+}
+.hero-feature span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
 .quick-card { display: grid; gap: 14px; }
-.quick-card--recent { min-height: 280px; align-content: start; }
+.quick-card--recent { min-height: 252px; align-content: start; }
 .quick-card--stats { align-content: start; }
 .quick-stats {
   display: grid;
@@ -351,13 +378,16 @@ a { color: inherit; text-decoration: none; }
   .view { width: min(100%, calc(100% - 16px)); padding: 16px 0 28px; gap: 22px; }
   .hero-layout, .summary-grid, .provider-grid, .results-grid, .seller-grid--two, .seller-grid--three, .seller-grid--split, .photo-grid { grid-template-columns: 1fr; }
   .hero-banner, .quick-card, .panel, .summary-card { padding: 18px; border-radius: 20px; }
+  .hero-feature-grid { grid-template-columns: 1fr; gap: 10px; }
+  .hero-feature { padding: 14px 16px; border-radius: 18px; }
+  .hero-feature span { margin-top: 6px; font-size: 0.84rem; }
   .quick-card--recent { min-height: 220px; }
   .quick-stats { grid-template-columns: minmax(84px, 96px) minmax(0, 1fr); gap: 8px; }
   .quick-stat { padding: 12px 10px; border-radius: 16px; }
   .quick-stat span { font-size: 0.76rem; }
   .quick-stat strong { margin-top: 8px; font-size: 1.1rem; }
   .hero-banner h1 { font-size: clamp(1.8rem, 8vw, 2.6rem); max-width: none; }
-  .hero-banner__brand { font-size: clamp(2.8rem, 11vw, 4.2rem); }
+  .hero-banner__brand { font-size: clamp(2.8rem, 11vw, 4.2rem); margin-top: 14px; margin-bottom: 20px; }
   .topbar-tab, .topbar-links a { min-height: 36px; padding: 0 12px; }
   .page-size { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .page-size__button { min-height: 34px; padding: 0 6px; font-size: 0.82rem; }
