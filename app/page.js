@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
+import PriceRangeControl from "@/components/PriceRangeControl";
 import {
   PAGE_SIZES,
   PROVIDERS,
@@ -170,20 +171,36 @@ export default function HomePage() {
                 ) : null}
               </label>
 
-              <label className="field">
-                <span>최소 가격</span>
-                <input type="number" value={minPrice} onChange={(event) => setMinPrice(event.target.value)} placeholder="0" />
-              </label>
+              <div className="price-range-block field--span-2">
+                <div className="field-row field-row--price">
+                  <label className="field">
+                    <span>최소 가격</span>
+                    <input
+                      type="number"
+                      value={minPrice}
+                      onChange={(event) => setMinPrice(event.target.value)}
+                      placeholder="0"
+                    />
+                  </label>
 
-              <label className="field">
-                <span>최대 가격</span>
-                <input
-                  type="number"
-                  value={maxPrice}
-                  onChange={(event) => setMaxPrice(event.target.value)}
-                  placeholder="제한 없음"
+                  <label className="field">
+                    <span>최대 가격</span>
+                    <input
+                      type="number"
+                      value={maxPrice}
+                      onChange={(event) => setMaxPrice(event.target.value)}
+                      placeholder="제한 없음"
+                    />
+                  </label>
+                </div>
+
+                <PriceRangeControl
+                  minPrice={minPrice}
+                  maxPrice={maxPrice}
+                  onMinPriceChange={setMinPrice}
+                  onMaxPriceChange={setMaxPrice}
                 />
-              </label>
+              </div>
 
               <label className="field">
                 <span>정렬</span>
@@ -230,22 +247,22 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-          </form>
 
-          <aside className="home-card home-recent">
-            <span className="section-label">최근 검색어</span>
-            <div className="chip-wrap">
-              {recentSearches.length ? (
-                recentSearches.map((keyword) => (
-                  <button key={keyword} type="button" className="chip" onClick={() => submitSearch(keyword)}>
-                    {keyword}
-                  </button>
-                ))
-              ) : (
-                <div className="empty-copy">최근 검색어가 아직 없어요.</div>
-              )}
+            <div className="home-search-panel__recent">
+              <span className="section-label">최근 검색어</span>
+              <div className="chip-wrap">
+                {recentSearches.length ? (
+                  recentSearches.map((keyword) => (
+                    <button key={keyword} type="button" className="chip" onClick={() => submitSearch(keyword)}>
+                      {keyword}
+                    </button>
+                  ))
+                ) : (
+                  <div className="empty-copy">최근 검색어가 아직 없어요.</div>
+                )}
+              </div>
             </div>
-          </aside>
+          </form>
         </header>
 
         <section className="feed-section">

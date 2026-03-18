@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import PriceRangeControl from "@/components/PriceRangeControl";
 import {
   PAGE_SIZES,
   PROVIDERS,
@@ -370,15 +371,24 @@ export default function SearchResultsPage() {
                 <input value={region} onChange={(event) => setRegion(event.target.value)} placeholder="하안동, 성수동, 서초동" />
               </label>
 
-              <div className="field-row">
-                <label className="field">
-                  <span>최소 가격</span>
-                  <input type="number" value={minPrice} onChange={(event) => setMinPrice(event.target.value)} />
-                </label>
-                <label className="field">
-                  <span>최대 가격</span>
-                  <input type="number" value={maxPrice} onChange={(event) => setMaxPrice(event.target.value)} />
-                </label>
+              <div className="price-range-block">
+                <div className="field-row field-row--price">
+                  <label className="field">
+                    <span>최소 가격</span>
+                    <input type="number" value={minPrice} onChange={(event) => setMinPrice(event.target.value)} />
+                  </label>
+                  <label className="field">
+                    <span>최대 가격</span>
+                    <input type="number" value={maxPrice} onChange={(event) => setMaxPrice(event.target.value)} placeholder="제한 없음" />
+                  </label>
+                </div>
+
+                <PriceRangeControl
+                  minPrice={minPrice}
+                  maxPrice={maxPrice}
+                  onMinPriceChange={setMinPrice}
+                  onMaxPriceChange={setMaxPrice}
+                />
               </div>
 
               <label className="field">
