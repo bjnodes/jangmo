@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import PriceRangeControl from "@/components/PriceRangeControl";
 import {
@@ -21,8 +21,11 @@ const SORT_OPTIONS = [
   { value: "priceDesc", label: "높은 가격순" },
 ];
 
+const HOME_FEED_LIMIT = 30;
+
 export default function HomePage() {
   const router = useRouter();
+  const loadMoreRef = useRef(null);
   const [query, setQuery] = useState("");
   const [region, setRegion] = useState("");
   const [minPrice, setMinPrice] = useState("");
@@ -33,38 +36,65 @@ export default function HomePage() {
   const [recentSearches, setRecentSearches] = useState([]);
   const [feedItems, setFeedItems] = useState([]);
   const [feedLoading, setFeedLoading] = useState(true);
+  const [feedLoadingMore, setFeedLoadingMore] = useState(false);
+  const [feedHasMore, setFeedHasMore] = useState(true);
+  const [feedOffset, setFeedOffset] = useState(0);
   const [regionSuggestions, setRegionSuggestions] = useState([]);
 
   useEffect(() => {
     setRecentSearches(readRecentSearches());
   }, []);
 
-  useEffect(() => {
-    let cancelled = false;
-    setFeedLoading(true);
+  async function fetchFeed(offset = 0, append = false) {
+    if (append) {
+      setFeedLoadingMore(true);
+    } else {
+      setFeedLoading(true);
+    }
 
-    fetch("/api/home-feed", { cache: "no-store" })
-      .then((response) => response.json())
-      .then((payload) => {
-        if (!cancelled) {
-          setFeedItems(Array.isArray(payload.items) ? payload.items : []);
-        }
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setFeedItems([]);
-        }
-      })
-      .finally(() => {
-        if (!cancelled) {
-          setFeedLoading(false);
-        }
+    try {
+      const response = await fetch(`/api/home-feed?offset=${offset}&limit=${HOME_FEED_LIMIT}`, {
+        cache: "no-store",
       });
+      const payload = await response.json();
+      const items = Array.isArray(payload.items) ? payload.items : [];
 
-    return () => {
-      cancelled = true;
-    };
+      setFeedItems((current) => (append ? [...current, ...items] : items));
+      setFeedHasMore(Boolean(payload.hasMore));
+      setFeedOffset(Number(payload.nextOffset || offset + items.length));
+    } catch {
+      if (!append) {
+        setFeedItems([]);
+      }
+      setFeedHasMore(false);
+    } finally {
+      setFeedLoading(false);
+      setFeedLoadingMore(false);
+    }
+  }
+
+  useEffect(() => {
+    fetchFeed(0, false);
   }, []);
+
+  useEffect(() => {
+    if (!loadMoreRef.current || !feedHasMore || feedLoading || feedLoadingMore) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (entry?.isIntersecting && !feedLoadingMore) {
+          fetchFeed(feedOffset, true);
+        }
+      },
+      { rootMargin: "280px 0px" },
+    );
+
+    observer.observe(loadMoreRef.current);
+    return () => observer.disconnect();
+  }, [feedHasMore, feedLoading, feedLoadingMore, feedOffset]);
 
   useEffect(() => {
     if (!region.trim()) {
@@ -87,7 +117,7 @@ export default function HomePage() {
     return () => window.clearTimeout(timer);
   }, [region]);
 
-  const visibleFeed = useMemo(() => feedItems.slice(0, 30), [feedItems]);
+  const visibleFeed = useMemo(() => feedItems, [feedItems]);
 
   function submitSearch(nextQuery = query) {
     const normalizedQuery = cleanText(nextQuery);
@@ -277,46 +307,50 @@ export default function HomePage() {
               <h2>방금 올라온 매물</h2>
               <p>세 플랫폼의 최신 매물을 한 화면에서 빠르게 둘러볼 수 있어요.</p>
             </div>
-            <div className="feed-section__meta">
-              <strong>{visibleFeed.length}</strong>
-              <span>개 표시 중</span>
-            </div>
           </div>
 
           {feedLoading ? (
             <div className="empty-state">매물 피드를 불러오는 중이에요.</div>
           ) : (
-            <div className="results-grid results-grid--home">
-              {visibleFeed.map((item) => (
-                <article key={item.url} className="result-card result-card--compact">
-                  <div className="result-card__image-wrap">
-                    {item.imageUrl ? (
-                      <img src={item.imageUrl} alt={item.title} referrerPolicy="no-referrer" />
-                    ) : (
-                      <div className="result-card__image-empty">이미지 없음</div>
-                    )}
-                    <span
-                      className="result-card__badge"
-                      style={{
-                        color: PROVIDER_ACCENTS[item.providerId] || item.providerAccent,
-                        background: `${PROVIDER_ACCENTS[item.providerId] || item.providerAccent || "#2f80ed"}18`,
-                      }}
-                    >
-                      {PROVIDERS[item.providerId] || item.providerName}
-                    </span>
-                  </div>
+            <>
+              <div className="results-grid results-grid--home">
+                {visibleFeed.map((item) => (
+                  <article key={item.url} className="result-card result-card--compact">
+                    <div className="result-card__image-wrap">
+                      {item.imageUrl ? (
+                        <img src={item.imageUrl} alt={item.title} referrerPolicy="no-referrer" />
+                      ) : (
+                        <div className="result-card__image-empty">이미지 없음</div>
+                      )}
+                      <span
+                        className="result-card__badge"
+                        style={{
+                          color: PROVIDER_ACCENTS[item.providerId] || item.providerAccent,
+                          background: `${PROVIDER_ACCENTS[item.providerId] || item.providerAccent || "#2f80ed"}18`,
+                        }}
+                      >
+                        {PROVIDERS[item.providerId] || item.providerName}
+                      </span>
+                    </div>
 
-                  <div className="result-card__body">
-                    <strong className="result-card__price">{item.price || formatPrice("")}</strong>
-                    <h3>{item.title}</h3>
-                    <p>{(item.meta || []).join(" · ") || "원문에서 자세한 정보를 확인해 주세요."}</p>
-                    <a className="result-card__link result-card__link--compact" href={item.url} target="_blank" rel="noreferrer">
-                      원문 보기
-                    </a>
-                  </div>
-                </article>
-              ))}
-            </div>
+                    <div className="result-card__body">
+                      <strong className="result-card__price">{item.price || formatPrice("")}</strong>
+                      <h3>{item.title}</h3>
+                      <p>{(item.meta || []).join(" · ") || "원문에서 자세한 정보를 확인해 주세요."}</p>
+                      <a className="result-card__link result-card__link--compact" href={item.url} target="_blank" rel="noreferrer">
+                        원문 보기
+                      </a>
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              <div ref={loadMoreRef} className="feed-load-anchor" aria-hidden="true" />
+
+              {feedLoadingMore ? (
+                <div className="feed-loading-more">다음 매물을 불러오는 중이에요.</div>
+              ) : null}
+            </>
           )}
         </section>
       </section>
