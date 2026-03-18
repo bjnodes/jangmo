@@ -1,10 +1,10 @@
 import "./globals.css";
 
-const BRAND_NAME = "\uC7A5\uD130\uBAA8\uC544";
+const BRAND_NAME = "장터모아";
 
 export const metadata = {
   title: BRAND_NAME,
-  description: "\uC911\uACE0\uAC70\uB798 \uD1B5\uD569\uAC80\uC0C9\uACFC \uD310\uB9E4 \uCD08\uC548 \uC791\uC131 \uC6F9 \uC571",
+  description: "중고거래 통합검색과 판매 초안 작성 웹 앱",
 };
 
 export default function RootLayout({ children }) {
