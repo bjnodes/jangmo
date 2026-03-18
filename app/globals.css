@@ -365,6 +365,250 @@ a { color: inherit; text-decoration: none; }
 .seller-platform-card__body { padding: 18px; }
 .seller-platform-card__actions { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 10px; }
 
+.market-home,
+.results-page {
+  min-height: 100vh;
+  padding: 28px 0 48px;
+}
+
+.home-shell,
+.results-shell {
+  width: min(1320px, calc(100% - 32px));
+  margin: 0 auto;
+  display: grid;
+  gap: 24px;
+}
+
+.home-topbar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) 280px;
+  gap: 22px;
+  align-items: start;
+}
+
+.home-brand {
+  min-height: 84px;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: rgba(255,255,255,0.88);
+  box-shadow: var(--shadow);
+}
+
+.home-brand__logo {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+}
+
+.home-brand__text strong {
+  display: block;
+  font-size: 1.18rem;
+}
+
+.home-brand__text span {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.home-search-anchor {
+  position: relative;
+}
+
+.home-searchbar {
+  width: 100%;
+  min-height: 84px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: rgba(255,255,255,0.94);
+  box-shadow: var(--shadow);
+}
+
+.home-searchbar__placeholder {
+  color: var(--text);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.home-searchbar__icon {
+  min-width: 88px;
+  min-height: 46px;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--brand);
+  color: #fff;
+  font-weight: 800;
+}
+
+.search-popup {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: 0 30px 60px rgba(20, 42, 84, 0.18);
+  overflow: hidden;
+}
+
+.search-popup__header,
+.search-popup__footer {
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+
+.search-popup__footer {
+  border-bottom: 0;
+  border-top: 1px solid var(--line);
+  justify-content: flex-end;
+}
+
+.search-popup__close {
+  min-width: 42px;
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 800;
+}
+
+.search-popup__body {
+  padding: 22px;
+  display: grid;
+  gap: 20px;
+}
+
+.search-popup__quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.suggestions--popup {
+  position: static;
+}
+
+.home-recent {
+  min-height: 84px;
+  padding: 22px;
+  display: grid;
+  gap: 14px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: rgba(255,255,255,0.88);
+  box-shadow: var(--shadow);
+}
+
+.home-ad {
+  min-height: 120px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: rgba(255,255,255,0.9);
+  box-shadow: var(--shadow);
+}
+
+.ad-shell {
+  width: 100%;
+}
+
+.feed-section {
+  display: grid;
+  gap: 20px;
+}
+
+.feed-section__header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.feed-section__header h2,
+.results-header h1 {
+  margin: 0;
+  font-size: clamp(1.7rem, 2vw, 2.2rem);
+  letter-spacing: -0.03em;
+}
+
+.feed-section__header p,
+.results-header p {
+  margin: 8px 0 0;
+  color: var(--muted);
+}
+
+.results-grid--home {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.results-header {
+  padding: 28px 30px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: rgba(255,255,255,0.92);
+  box-shadow: var(--shadow);
+}
+
+.results-overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) 320px;
+  gap: 20px;
+}
+
+.results-overview__providers,
+.results-overview__summary {
+  display: grid;
+  gap: 16px;
+}
+
+.results-overview__providers {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.results-overview__summary {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.results-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 22px;
+  align-items: start;
+}
+
+.results-main,
+.results-sidebar {
+  display: grid;
+  gap: 20px;
+}
+
+.results-grid--search {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.seller-panel {
+  display: grid;
+  gap: 30px;
+}
+
 @media (max-width: 1100px) {
   .shell-topbar__inner, .view { width: min(100%, calc(100% - 24px)); }
   .shell-topbar__inner { grid-template-columns: 1fr; padding: 12px 0; }
@@ -374,6 +618,13 @@ a { color: inherit; text-decoration: none; }
   .provider-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .results-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .seller-grid--three, .seller-grid--split { grid-template-columns: 1fr; }
+  .home-topbar,
+  .results-overview,
+  .results-layout { grid-template-columns: 1fr; }
+  .results-overview__providers,
+  .results-overview__summary,
+  .results-grid--home,
+  .results-grid--search { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 760px) {
@@ -406,4 +657,20 @@ a { color: inherit; text-decoration: none; }
   .result-card__link, .primary-button, .secondary-button { width: fit-content; max-width: 100%; }
   .seller-platform-card__actions { justify-content: flex-start; }
   .suggestions { position: static; }
+  .market-home,
+  .results-page { padding: 16px 0 28px; }
+  .home-shell,
+  .results-shell { width: min(100%, calc(100% - 16px)); }
+  .home-topbar { grid-template-columns: 1fr; }
+  .home-brand,
+  .home-recent,
+  .home-searchbar,
+  .results-header { min-height: auto; }
+  .home-searchbar { padding: 18px; align-items: flex-start; flex-direction: column; }
+  .home-searchbar__placeholder { font-size: 1rem; }
+  .search-popup { position: static; margin-top: 12px; }
+  .results-overview__providers,
+  .results-overview__summary,
+  .results-grid--home,
+  .results-grid--search { grid-template-columns: 1fr; }
 }
