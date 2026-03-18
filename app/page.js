@@ -70,9 +70,9 @@ function buildClipboardText(draft, platformId) {
   const category = draft.categoryMap[platformId] || draft.commonCategory;
   return [
     draft.title,
-    draft.price ? `Price: ${formatPrice(draft.price)}` : "",
-    category ? `Category: ${category}` : "",
-    draft.region ? `Region: ${draft.region}` : "",
+    draft.price ? `\uAC00\uACA9: ${formatPrice(draft.price)}` : "",
+    category ? `\uCE74\uD14C\uACE0\uB9AC: ${category}` : "",
+    draft.region ? `\uC9C0\uC5ED: ${draft.region}` : "",
     draft.description ? "" : "",
     draft.description || "",
   ]
@@ -296,7 +296,7 @@ export default function HomePage() {
       <header className="shell-topbar">
         <div className="shell-topbar__inner">
           <div className="brand">
-            <img className="brand__logo" src="/jangteomoa-logo.png" alt={`${BRAND_NAME} logo`} />
+            <img className="brand__logo" src="/jangteomoa-logo.png" alt={`${BRAND_NAME} \uB85C\uACE0`} />
             <div>
               <strong>{BRAND_NAME}</strong>
               <span>\uC911\uACE0\uAC70\uB798 \uD1B5\uD569\uAC80\uC0C9 \uC6F9 \uC571</span>
@@ -670,7 +670,7 @@ export default function HomePage() {
                   <div className="photo-grid">
                     {sellerPhotoUrls.map((url, index) => (
                       <div key={url} className="photo-item">
-                        <img src={url} alt={`Draft photo ${index + 1}`} />
+                        <img src={url} alt={`\uCD08\uC548 \uC0AC\uC9C4 ${index + 1}`} />
                         <span>{index + 1}</span>
                       </div>
                     ))}
