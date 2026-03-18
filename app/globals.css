@@ -35,7 +35,7 @@ a { color: inherit; text-decoration: none; }
 
 .app-content {
   min-height: 100vh;
-  padding-top: 128px;
+  padding-top: 138px;
 }
 
 .global-header {
@@ -558,7 +558,7 @@ a { color: inherit; text-decoration: none; }
   width: min(1320px, calc(100% - 32px));
   margin: 0 auto;
   display: grid;
-  gap: 24px;
+  gap: 30px;
 }
 
 .home-topbar {
