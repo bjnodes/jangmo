@@ -348,7 +348,9 @@ export default function HomePage() {
               <div ref={loadMoreRef} className="feed-load-anchor" aria-hidden="true" />
 
               {feedLoadingMore ? (
-                <div className="feed-loading-more">다음 매물을 불러오는 중이에요.</div>
+                <div className="feed-loading-more" aria-label="다음 매물 로딩 중">
+                  <span className="feed-loading-more__spinner" aria-hidden="true" />
+                </div>
               ) : null}
             </>
           )}
