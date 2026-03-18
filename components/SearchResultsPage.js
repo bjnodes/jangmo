@@ -256,6 +256,30 @@ export default function SearchResultsPage() {
                 : "검색 결과를 플랫폼별로 나눠서 한 화면에서 비교할 수 있어요."}
             </p>
           </div>
+          <div className="results-header__mobile-summary">
+            <div className="results-header__mobile-stats">
+              <div className="results-header__mobile-chip">
+                <span>珥?寃곌낵</span>
+                <strong>{filteredItems.length}媛?</strong>
+              </div>
+              <div className="results-header__mobile-chip results-header__mobile-chip--wide">
+                <span>?됯퇏 ?쒖꽭</span>
+                <strong>{avgPrice}</strong>
+              </div>
+            </div>
+
+            <div className="results-header__mobile-providers">
+              {providerCards.map((provider) => (
+                <div key={provider.id} className="results-header__mobile-provider">
+                  <div className="results-header__mobile-provider-title">
+                    <span className="provider-card__dot" style={{ background: provider.accent }} />
+                    <strong>{provider.name}</strong>
+                  </div>
+                  <small>{provider.visible}媛??쒖떆</small>
+                </div>
+              ))}
+            </div>
+          </div>
         </header>
 
         <section className="results-overview">

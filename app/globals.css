@@ -923,6 +923,73 @@ a { color: inherit; text-decoration: none; }
   padding: 28px 30px;
 }
 
+.results-header__mobile-summary {
+  display: none;
+}
+
+.results-header__mobile-stats,
+.results-header__mobile-providers {
+  display: grid;
+  gap: 10px;
+}
+
+.results-header__mobile-stats {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.results-header__mobile-chip,
+.results-header__mobile-provider {
+  min-width: 0;
+  padding: 12px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(47, 128, 237, 0.14);
+  background: linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+}
+
+.results-header__mobile-chip {
+  display: grid;
+  gap: 6px;
+}
+
+.results-header__mobile-chip span,
+.results-header__mobile-provider small {
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.results-header__mobile-chip strong {
+  font-size: 1rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.results-header__mobile-chip--wide strong {
+  white-space: normal;
+  word-break: keep-all;
+}
+
+.results-header__mobile-providers {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.results-header__mobile-provider {
+  display: grid;
+  gap: 6px;
+}
+
+.results-header__mobile-provider-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.results-header__mobile-provider-title strong {
+  font-size: 0.85rem;
+  line-height: 1.2;
+}
+
 .results-overview {
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.9fr);
@@ -1254,8 +1321,38 @@ a { color: inherit; text-decoration: none; }
   .home-options__footer { grid-template-columns: 1fr; }
   .page-size--home { min-width: 0; }
   .feed-section__header { align-items: flex-start; flex-direction: column; }
-  .results-overview__providers,
-  .results-overview__summary,
+  .results-header {
+    padding: 18px;
+    display: grid;
+    gap: 14px;
+  }
+  .results-header__mobile-summary {
+    display: grid;
+    gap: 10px;
+  }
+  .results-header__mobile-stats {
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  }
+  .results-header__mobile-providers {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .results-header__mobile-chip,
+  .results-header__mobile-provider {
+    padding: 10px 11px;
+    border-radius: 16px;
+  }
+  .results-header__mobile-chip strong {
+    font-size: 0.92rem;
+  }
+  .results-header__mobile-provider-title strong {
+    font-size: 0.78rem;
+  }
+  .results-header__mobile-provider small {
+    font-size: 0.7rem;
+  }
+  .results-overview {
+    display: none;
+  }
   .results-grid--search { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .results-grid--home { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
   .summary-card--wide strong { white-space: normal; }
